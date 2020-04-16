@@ -11,11 +11,14 @@
 			<div class="order_info">
 				<h3><?= $order->description ?></h3>
 				<div class="info">
-					<span><?= $order->order_date ?></span>
+					<span><?= $order->order_date ?></span> <br/>
+                    <span>Client ID: <?= $order->client_id ?><br/></span>
 					<span class="see_details">See order details...</span>
 				</div>
 			</div>
 		</a>
+        <span><a href="/index.php?controller=orders&action=edit&id=<?= $order->id ?>">Edit</a> </span> <br>
+        <span><a href="/index.php?controller=orders&action=deleteCommande&id=<?= $order->id ?>">Delete</a></span>
 	</div>
 <?php endforeach ?>
 

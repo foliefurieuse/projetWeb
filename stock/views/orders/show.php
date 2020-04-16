@@ -11,6 +11,8 @@
    Total Amount: $<?= $myorder->order_total ?><br/>
     Order Status: <?= $myorder->order_status ?><br/>
     Client ID: <?= $myorder->client_id ?><br/>
+
+
 </div>
 
 

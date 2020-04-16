@@ -5,7 +5,7 @@ class DBConnect
     public static function getInstance()
     {
         if (!isset(self::$instance)) {
-            self::$instance = new PDO("mysql:host=localhost;dbname=blog_db", "root", "", NULL);
+            self::$instance = new PDO("mysql:host=localhost;dbname=blog_db", "user", "hyverneaux", NULL);
         } //end if
         return self::$instance;
     } //end function

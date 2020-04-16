@@ -8,8 +8,10 @@ class Order
     public $order_total;
     public $order_date;
     public $order_status;
+    public $user_id;
 
     public function __construct(
+        $user_id = -1,
         $id = false,
         $client_id = false,
         $order_total = false,
@@ -17,6 +19,8 @@ class Order
         $order_status = false,
         $order_date = false
     ) {
+        if($user_id!=-1)
+            $this->client_id = $user_id;
         if ($id === false) return;
 
         $this->id = $id;
@@ -32,10 +36,16 @@ class Order
         global $con;
         $list = array();
         //$con = DBConnect::getInstance(); //static method
-        $orders = $con->query('SELECT * FROM orders');
+
+        $orders = $con->query('SELECT * FROM orders WHERE client_id='.$this->client_id);
+
+
+        //L'ADMIN VOIT TOUT
+        if($_SESSION['admin'])
+            $orders = $con->query('SELECT * FROM orders');
 
         foreach ($orders as $order)
-            $list[] = new Order($order['id'], $order['client_id'], NULL, $order['ord_description'], NULL, NULL);
+            $list[] = new Order($this->client_id, $order['id'], $order['client_id'], NULL, $order['ord_description'], NULL, $order['order_date']);
         return $list;
     }
     public function find($id)
@@ -46,6 +56,7 @@ class Order
         $req->execute(array('id' => $id));
         $order = $req->fetch();
         return new Order(
+            -1,
             $order['id'],
             $order['client_id'],
             $order['ord_total'],
@@ -54,4 +65,6 @@ class Order
             $order['order_date']
         );
     }
+
+
 }//end class Order
