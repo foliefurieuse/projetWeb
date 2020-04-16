@@ -2,12 +2,20 @@
 
 class Order
 {
-    public $id;
-    public $client_id;
+    public $orderid;
+    public $customerid;
     public $description;
-    public $order_total;
-    public $order_date;
+    public $amount;
+    public $date;
     public $order_status;
+    public $ship_name;
+    public $ship_adress;
+    public $ship_city;
+    public $ship_state;
+    public $ship_zip;
+    public $ship_country;
+
+
 
     public function __construct(
         $id = false,
@@ -19,11 +27,11 @@ class Order
     ) {
         if ($id === false) return;
 
-        $this->id = $id;
-        $this->client_id = $client_id;
+        $this->orderid = $id;
+        $this->customerid = $client_id;
         $this->description = $description;
-        $this->order_total = $order_total;
-        $this->order_date = $order_date;
+        $this->amount = $order_total;
+        $this->date = $order_date;
         $this->order_status = $order_status;
     } //end construct
 
@@ -42,7 +50,7 @@ class Order
     {
         global $con;
         $id = intval($id);
-        $req = $con->prepare('SELECT * FROM orders where id=:id');
+        $req = $con->prepare('SELECT * FROM orders where orderid=:id');
         $req->execute(array('id' => $id));
         $order = $req->fetch();
         return new Order(

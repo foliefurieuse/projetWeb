@@ -8,8 +8,12 @@ function routing($controller, $action)
             $myController = new PagesController();
             break;
         case 'orders':
-            require_once('models/order.php');
+            require_once(ROOT_PATH.'/models/order.php');
             $myController = new OrdersController();
+            break;
+        case 'products':
+            require_once(ROOT_PATH.'/models/product.php');
+            $myController = new ProductsController();
             break;
     }
     $myController->{$action}();
@@ -17,7 +21,8 @@ function routing($controller, $action)
 
 $controllers = array(
     'pages' => ['home', 'error'],
-    'orders' => ['index', 'show']
+    'orders' => ['index', 'show'],
+    'products' => ['index', 'show', 'newProduct']
 );
 
 // var_dump($controllers);

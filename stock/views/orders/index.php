@@ -11,7 +11,7 @@
 			<div class="order_info">
 				<h3><?= $order->description ?></h3>
 				<div class="info">
-					<span><?= $order->order_date ?></span>
+					<span><?= $order->order_date ?></span>ce
 					<span class="see_details">See order details...</span>
 				</div>
 			</div>
